@@ -1,0 +1,28 @@
+﻿<Application x:Class="UI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+             xmlns:local="clr-namespace:UI"
+             StartupUri="View/MainWindow1.xaml">
+    <Application.Resources>
+
+        <Style x:Key="styleImage" TargetType="Image">
+            <Setter Property="Source" Value="C:\Users\renan\source\repos\projectFlights\UI\icon\airplane-mode.png"/>
+        </Style>
+
+        <Style x:Key="commonTeaget" TargetType="Control">
+            <Setter Property="FontFamily" Value="../#FbExtazi Regular"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FlowDirection" Value="LeftToRight"/>
+        </Style>
+
+        <Style x:Key="forCanvas" TargetType="Canvas">
+            <Setter Property="Background" Value="#FFA4E4ED"/>
+        </Style>
+
+        <Style x:Key="FontForLabel" TargetType="Label" BasedOn="{StaticResource commonTeaget}">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+    </Application.Resources>
+</Application>
