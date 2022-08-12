@@ -32,7 +32,6 @@ namespace UI.View
         {
             InitializeComponent();
             bl = _bl;
-
         }
 
         private void searchButton_Click(object sender, RoutedEventArgs e)

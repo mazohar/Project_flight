@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using UI.ViewModels;
+using System.Threading;
 
 namespace UI.View
 {
@@ -26,6 +27,8 @@ namespace UI.View
         //private Stopwatch stopWatch;
 
         MainWindowVM vm;
+        private bool isTimerRun;
+        BackgroundWorker timerworker;
         public MainWindow1()
         {
             InitializeComponent();
@@ -33,13 +36,21 @@ namespace UI.View
             
             DataContext = vm;
             map = vm.Map;
-            //map.DataContext = vm.Map;
+          
+
+            timerworker = new BackgroundWorker();
+            timerworker.DoWork += Worker_DoWork;
+            timerworker.ProgressChanged += Worker_ProgressChanged;
+            timerworker.WorkerReportsProgress = true;
+            isTimerRun = true;
+            timerworker.RunWorkerAsync();
+
         }
 
         private void historyFlights_MouseDoubleClick(object sender, RoutedEventArgs e)
         {
             //HistoryFlightsWindow historyFlightsWindow = new HistoryFlightsWindow(bl);
-            HistoryFlightsWindow1 historyFlightsWindow = new HistoryFlightsWindow1();
+            HistoryFlightsWindow historyFlightsWindow = new HistoryFlightsWindow();
 
             historyFlightsWindow.Left = this.Left;
             historyFlightsWindow.Top = this.Top;
@@ -60,6 +71,19 @@ namespace UI.View
                 MessageBox.Show(ex.Message);
             }
 
+        }
+        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            vm.showFlights();
+        }
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (isTimerRun)
+            {
+                timerworker.ReportProgress(1);
+                Thread.Sleep(10000);
+            }
         }
 
 

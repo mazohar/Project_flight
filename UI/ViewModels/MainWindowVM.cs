@@ -159,13 +159,15 @@ namespace UI.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        private void showFlights()
+        public void showFlights()
         {
             Location BGA = new Location(32.009444, 34.876944);
             var flightKeys = model.getFlights();
             flightIn = new ObservableCollection<FlightData>(flightKeys["Incoming"]);
             flightOut = new ObservableCollection<FlightData>(flightKeys["Outgoing"]);
             showAllFlight.Children.Clear();
+            showAllFlight = new MapLayer();
+
             map.Children.Remove(showAllFlight);
 
             foreach (var i in flightKeys)
@@ -179,6 +181,18 @@ namespace UI.ViewModels
                 }
             }
             map.Children.Add(showAllFlight);
+
+            /*
+             * var PlaneLocation = new Location { Latitude = lat, Longitude = lon };
+            MapLayer mapLayer = new MapLayer();
+           
+            mapLayer.AddChild(ImagePinMap, PlaneLocation, origin);
+           
+           
+
+            map.Children.Add(mapLayer);
+            */
+
         }
 
         Image addAirPlane(int rotate)
@@ -186,16 +200,38 @@ namespace UI.ViewModels
             Image myPushPin = new Image();
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
-            bitmap.UriSource = new Uri(@"C:\Users\renan\source\repos\projectFlights\UI\icon\airplane-mode.png");
+            bitmap.UriSource = new Uri(@"C:\Users\מעין זוהר\Downloads\project (1)\UI\icon\airplane-mode.png");
             bitmap.DecodePixelHeight = 256;
             bitmap.DecodePixelWidth = 256;
             bitmap.EndInit();
             myPushPin.Source = bitmap;
-            //myPushPin.Source = new BitmapImage(new Uri(@"C:\Users\renan\source\repos\projectFlights\UI\icon\airplane-mode.png", UriKind.Relative));
+
             myPushPin.Width = 20;
             myPushPin.Height = 20;
             myPushPin.RenderTransform = new RotateTransform(rotate, 7.5, 7.5);
             return myPushPin;
+
+            /*
+            RotateTransform rotateTransform = new RotateTransform(Angle);
+            image.RenderTransform = rotateTransform;
+            image.Height = 20;
+            image.Width = 20;
+            ImagePinMap = image;
+            ImagePinMap.ToolTip = flightM.FlightCode;
+            if (flightM.FlightCode == "")
+                ImagePinMap.ToolTip = "Data Problem";
+
+            var PlaneLocation = new Location { Latitude = lat, Longitude = lon };
+            MapLayer mapLayer = new MapLayer();
+
+            mapLayer.AddChild(ImagePinMap, PlaneLocation, origin);
+
+
+
+            map.Children.Add(mapLayer);
+            */
+
+
         }
 
         void addNewPolyLine(List<Trail> route, FlightData flight)
@@ -216,6 +252,7 @@ namespace UI.ViewModels
             routeFlight.Children.Add(pinOrigin);
             routeFlight.Children.Add(polyline);
             map.Children.Add(routeFlight);
+            showFlights();
 
         }
 

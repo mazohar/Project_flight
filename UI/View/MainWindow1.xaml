@@ -9,7 +9,7 @@
         Title="MainWindow1" Height="620" Width="1210">
     <Window.Resources>
         <Style x:Key="styleImage" TargetType="Image">
-            <Setter Property="Source" Value="C:\Users\renan\source\repos\projectFlights\UI\icon\airplane-mode.png"/>
+            <Setter Property="Source" Value="/icon/airplane-mode.png" />
         </Style>
     </Window.Resources>
 
