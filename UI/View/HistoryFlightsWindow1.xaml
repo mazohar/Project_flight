@@ -17,9 +17,9 @@
 
         <Canvas Grid.Row="0">
             <Label Content="Select a start date and an end date:" Canvas.Left="20" Canvas.Top="20"/>
-            <DatePicker Name="fromDate" SelectedDate="{Binding FromDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="110" Height="25" Canvas.Left="230" Canvas.Top="20"
+            <DatePicker Name="fromTime" SelectedDate="{Binding FromTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="110" Height="25" Canvas.Left="230" Canvas.Top="20"
                         DisplayDateEnd="{Binding Mode=OneWay, Source={x:Static System:DateTime.Today}}"/>
-            <DatePicker Name="toDate" SelectedDate="{Binding ToDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="110" Height="25" Canvas.Left="350" Canvas.Top="20"
+            <DatePicker Name="toTime" SelectedDate="{Binding ToTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="110" Height="25" Canvas.Left="350" Canvas.Top="20"
                         DisplayDateEnd="{Binding Mode=OneWay, Source={x:Static System:DateTime.Today}}"/>
             <Button x:Name="searchButton" Content="filter" Width="50" Height="25" Canvas.Left="500" Canvas.Top="20" Command="{Binding FlightsFromDBCommand, UpdateSourceTrigger=PropertyChanged}">
                 <Button.Style>

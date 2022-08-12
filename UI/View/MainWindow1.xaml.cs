@@ -50,7 +50,7 @@ namespace UI.View
         private void historyFlights_MouseDoubleClick(object sender, RoutedEventArgs e)
         {
             //HistoryFlightsWindow historyFlightsWindow = new HistoryFlightsWindow(bl);
-            HistoryFlightsWindow historyFlightsWindow = new HistoryFlightsWindow();
+            HistoryFlightsWindow1 historyFlightsWindow = new HistoryFlightsWindow1();
 
             historyFlightsWindow.Left = this.Left;
             historyFlightsWindow.Top = this.Top;
@@ -58,9 +58,22 @@ namespace UI.View
 
         }
 
-        private void listView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void listViewFlightIn_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var selectedFlight = listViewFlightIn.SelectedItem as FlightData;
+            listView_MouseDoubleClick(selectedFlight);
+
+        }
+
+        private void listViewFlightOut_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var selectedFlight = listViewFlightOut.SelectedItem as FlightData;
+            listView_MouseDoubleClick(selectedFlight);
+        }
+
+        private void listView_MouseDoubleClick(FlightData selectedFlight)
+        {
+            //var selectedFlight = listViewFlightIn.SelectedItem as FlightData;
             f.Visibility = Visibility.Visible;
             try
             {

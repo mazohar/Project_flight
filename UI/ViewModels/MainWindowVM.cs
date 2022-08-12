@@ -22,8 +22,7 @@ namespace UI.ViewModels
     class MainWindowVM : INotifyPropertyChanged
     {
         MainWindowM model = new MainWindowM();
-        //ObservableCollection<FlightData> flightIn;
-        //ObservableCollection<FlightData> flightOut;
+
 
         public MainWindowVM(Map _map)
         {
@@ -36,11 +35,6 @@ namespace UI.ViewModels
             showAllFlight = new MapLayer();
             map.Children.Add(routeFlight);
             map.Children.Add(showAllFlight);
-
-            Pushpin p = new Pushpin();
-            Location l = new Location(32.009444, 34.876944);
-            p.Location = l;
-            map.Children.Add(p);
 
             holiday = ifBeforeHoliday() + " will apply soon";
 
@@ -200,7 +194,7 @@ namespace UI.ViewModels
             Image myPushPin = new Image();
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
-            bitmap.UriSource = new Uri(@"C:\Users\מעין זוהר\Downloads\project (1)\UI\icon\airplane-mode.png");
+            bitmap.UriSource = new Uri(@"C:\Users\renan\Source\Repos\Project_flight\UI\icon\airplane-mode.png");
             bitmap.DecodePixelHeight = 256;
             bitmap.DecodePixelWidth = 256;
             bitmap.EndInit();
@@ -265,7 +259,7 @@ namespace UI.ViewModels
                 var trail = (from t in flight.Trail orderby t.ts select t).ToList<Trail>();
                 addNewPolyLine(trail, selectedFlight);
 
-                //model.addFlightToDB(flight);
+                model.addFlightToDB(flight);
 
                 frame.Content = new DetailsPage1(flight);
             }
