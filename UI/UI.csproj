@@ -80,9 +80,6 @@
     <Compile Include="View\DetailsPage.xaml.cs">
       <DependentUpon>DetailsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Try.xaml.cs">
-      <DependentUpon>Try.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\HistoryFlightsWindow.xaml.cs">
       <DependentUpon>HistoryFlightsWindow.xaml</DependentUpon>
     </Compile>
@@ -104,10 +101,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Try.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -135,7 +128,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Resource Include="ALEF-REGULAR.TTF" />
+    <Resource Include="FBEXTAZI-REGULAR.OTF" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

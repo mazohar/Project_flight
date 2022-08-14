@@ -16,12 +16,12 @@
         </Grid.RowDefinitions>
 
         <Canvas Grid.Row="0">
-            <Label Content="Select a start date and an end date:" Canvas.Left="20" Canvas.Top="20"/>
+            <Label Content="Select a start date and an end date:" Canvas.Left="20" Canvas.Top="20" FontFamily="../#FbExtazi Regular" FontSize="14"/>
             <DatePicker Name="fromTime" SelectedDate="{Binding FromTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="110" Height="25" Canvas.Left="230" Canvas.Top="20"
                         DisplayDateEnd="{Binding Mode=OneWay, Source={x:Static System:DateTime.Today}}"/>
             <DatePicker Name="toTime" SelectedDate="{Binding ToTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="110" Height="25" Canvas.Left="350" Canvas.Top="20"
                         DisplayDateEnd="{Binding Mode=OneWay, Source={x:Static System:DateTime.Today}}"/>
-            <Button x:Name="searchButton" Content="filter" Width="50" Height="25" Canvas.Left="500" Canvas.Top="20"
+            <Button x:Name="searchButton" Content="filter" Width="50" Height="25" Canvas.Left="500" Canvas.Top="20" FontFamily="../#FbExtazi Regular"
                     Command="{Binding FlightsFromDBCommand, UpdateSourceTrigger=PropertyChanged}">
                 <Button.Style>
                     <Style>
@@ -40,7 +40,8 @@
             </Button>
         </Canvas>
 
-        <ListView x:Name="listViewHistory" ItemsSource="{Binding Flights}" Grid.Row="1"  Background="AliceBlue">
+        <ListView x:Name="listViewHistory" ItemsSource="{Binding Flights}" Grid.Row="1"  Background="AliceBlue"
+                  FontFamily="../#FbExtazi Regular" FontSize="15">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Flight" Width="80" DisplayMemberBinding="{Binding FlightCode}"/>

@@ -24,76 +24,68 @@
         
         <Canvas Grid.RowSpan="1" Grid.ColumnSpan="2" Background="#26AEBC">
             <Button x:Name="exit" Width="25" Height="25" Canvas.Top="12.5" Canvas.Left="5" Click="exit_Click" Background="#26AEBC" BorderBrush="#26AEBC">
-                <Image Source="C:\Users\מעין זוהר\Source\Repos\Project_flight3\UI\icon\undo.png"/>
+                <Image Source="C:\Users\renan\source\repos\Project_flight\UI\icon\undo.png"/>
             </Button>
             <Label x:Name="flightCode" Content="{Binding Flight.FlightCode, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="30" VerticalContentAlignment="Center" Canvas.Left="40" 
-                   FontWeight="Bold" FontSize="15"/>
-            <Label x:Name="airLine" Content="{Binding Flight.AirLainName}" Width="200" Height="25" Canvas.Top="25"  VerticalContentAlignment="Center" Canvas.Left="40"/>
+                   FontWeight="Bold" FontSize="18" FontFamily="../#FbExtazi Regular"/>
+            <Label x:Name="airLine" FontFamily="../#FbExtazi Regular" FontSize="15" Content="{Binding Flight.AirLainName}" Width="200" Height="25" Canvas.Top="25"  VerticalContentAlignment="Center" Canvas.Left="40"/>
         </Canvas>
         
         <Image x:Name="pictureAirPLane" Source="{Binding Flight.PictureOfAirPlane}" Width="300" Height="150" Grid.ColumnSpan="2" Grid.Row="1"/>
         
         <Canvas Grid.Row="2" Grid.Column="0" Background="#D5F4F7" Margin="2">
-            <Label x:Name="originCode" Content="{Binding Flight.SourceCode, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold"
+            <Label x:Name="originCode" Content="{Binding Flight.SourceCode, UpdateSourceTrigger=PropertyChanged}"
+                   FontWeight="Bold" FontFamily="../#FbExtazi Regular"
                Width="100" Height="60" FontSize="30" HorizontalContentAlignment="Center" Canvas.Left="25"/>
             <Label x:Name="originName" Content="{Binding Flight.SourceName}"
-               Width="100" Height="40" FontSize="15" HorizontalContentAlignment="Center" Canvas.Left="25" Canvas.Top="50" />
+               Width="100" Height="40" FontSize="15" FontFamily="../#FbExtazi Regular" HorizontalContentAlignment="Center" Canvas.Left="25" Canvas.Top="50" />
         </Canvas>
 
         <Canvas Grid.Row="2" Grid.Column="1" Background="#D5F4F7" Margin="2">
-            <Label x:Name="desCode" Content="{Binding Flight.DestinationCode}" FontWeight="Bold"
+            <Label x:Name="desCode" Content="{Binding Flight.DestinationCode}" FontWeight="Bold" FontFamily="../#FbExtazi Regular"
                Width="100" Height="60" FontSize="30" HorizontalContentAlignment="Center" Canvas.Left="25"/>
             <Label x:Name="desName" Content="{Binding Flight.DestinationName}"
-               Width="100" Height="40" FontSize="15" HorizontalContentAlignment="Center" Canvas.Left="25" Canvas.Top="50"/>
+               Width="100" Height="40" FontSize="15" FontFamily="../#FbExtazi Regular" HorizontalContentAlignment="Center" Canvas.Left="25" Canvas.Top="50"/>
         </Canvas>
 
         <Canvas Grid.Row="3" Grid.Column="0" Background="#C8F0F4" Margin="2">
-            <Label Content="SCHEDULED"
-               Width="100" Height="45" FontSize="13" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-            <Label x:Name="originTime" Content="{Binding Flight.TimeOfFly}" FontWeight="Bold" Canvas.Right="0"
-               Width="100" Height="45" FontSize="15" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <Label Content="SCHEDULED" FontFamily="../#FbExtazi Regular"
+               Width="100" Height="45" FontSize="15" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <Label x:Name="originTime" Content="{Binding Flight.TimeOfFly}" FontWeight="Bold" FontFamily="../#FbExtazi Regular" Canvas.Right="0"
+               Width="100" Height="45" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
         </Canvas>
 
         <Canvas Grid.Row="3" Grid.Column="1" Background="#C8F0F4" Margin="2">
             <Label Content="SCHEDULED"
-               Width="100" Height="45" FontSize="13" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+               Width="100" Height="45" FontSize="15" FontFamily="../#FbExtazi Regular" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
             <Label x:Name="desTime" Content="{Binding Flight.TimeOfFArrive}" FontWeight="Bold" Canvas.Right="0"
-               Width="100" Height="45" FontSize="15" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <Canvas.Style>
-                <Style>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding ElementName=isLate, Path=Text}" Value="true">
-                            <Setter Property="Canvas.Background" Value="Red"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Canvas.Style>
+               Width="100" Height="45" FontSize="18" FontFamily="../#FbExtazi Regular" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
         </Canvas>
 
         <Canvas Grid.Row="4" Grid.Column="0" Background="#C8F0F4" Margin="2">
-            <Label x:Name="stateOrigin" Content="{Binding WeatherOrigin.State}" FontWeight="Bold"
-               Width="145" Height="30" FontSize="13" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="stateOrigin" Content="{Binding WeatherOrigin.State}" FontWeight="Bold" FontFamily="../#FbExtazi Regular"
+               Width="145" Height="30" FontSize="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label Content="TEMPERATURE" Canvas.Top="35"
-               Width="100" Height="30" FontSize="13" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+               Width="105" Height="30" FontSize="15" FontFamily="../#FbExtazi Regular" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
             <Label x:Name="tempOrigin" Content="{Binding WeatherOrigin.Temp}" FontWeight="Bold" Canvas.Right="0" Canvas.Top="35"
-               Width="45" Height="30" FontSize="13" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+               Width="45" Height="30" FontSize="15" FontFamily="../#FbExtazi Regular" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label Content="FEEL LIKE" Canvas.Bottom="0"
-                   FontSize="13" Height="30" VerticalContentAlignment="Center"/>
+                   FontSize="15" FontFamily="../#FbExtazi Regular" Height="30" VerticalContentAlignment="Center"/>
             <Label x:Name="feelOrigin" Content="{Binding WeatherOrigin.FeelLikeTemp}" Canvas.Bottom="0" Canvas.Right="0"
-                   Width="45" Height="30" FontSize="13" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                   Width="45" Height="30" FontSize="15" FontFamily="../#FbExtazi Regular" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         </Canvas>
 
         <Canvas Grid.Row="4" Grid.Column="1" Background="#C8F0F4" Margin="2">
             <Label x:Name="stateDes" Content="{Binding WeatherDestination.State}" FontWeight="Bold"
-               Width="145" Height="30" FontSize="13" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+               Width="145" Height="30" FontSize="15" FontFamily="../#FbExtazi Regular" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label Content="TEMPERATURE" Canvas.Top="35"
-               Width="100" Height="30" FontSize="13" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+               Width="105" Height="30" FontSize="15" FontFamily="../#FbExtazi Regular" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
             <Label x:Name="tempDes" Content="{Binding WeatherDestination.Temp}" FontWeight="Bold" Canvas.Right="0" Canvas.Top="35"
-               Width="45" Height="30" FontSize="13" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+               Width="45" Height="30" FontSize="15" FontFamily="../#FbExtazi Regular" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label Content="FEEL LIKE" Canvas.Bottom="0"
-                   FontSize="13" Height="30" VerticalContentAlignment="Center"/>
+                   FontSize="15" FontFamily="../#FbExtazi Regular" Height="30" VerticalContentAlignment="Center"/>
             <Label x:Name="feelDes" Content="{Binding WeatherDestination.FeelLikeTemp}" Canvas.Bottom="0" Canvas.Right="0"
-                   Width="45" Height="30" FontSize="13" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                   Width="45" Height="30" FontSize="15" FontFamily="../#FbExtazi Regular" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         </Canvas>
 
 
