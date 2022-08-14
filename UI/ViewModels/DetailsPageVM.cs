@@ -15,14 +15,12 @@ namespace UI.ViewModels
     class DetailsPageVM : INotifyPropertyChanged
     {
         DetailsPageM model = new DetailsPageM();
-        //public ICommand flightDetailsCommand { get; set; }
 
         public DetailsPageVM(FlightDetails _flight)
         {
             flight = _flight;
             weatherOrigin = model.GetWeather(flight.SourceLat, flight.SourceLong);
             weatherDestination = model.GetWeather(flight.DestinationLat, flight.DestinationLong);
-            //flightDetailsCommand = new GetFlightDetailsCommand(this);
         }
 
         Weather weatherOrigin;

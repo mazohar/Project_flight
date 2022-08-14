@@ -29,7 +29,6 @@ namespace UI.ViewModels
             var flightKeys = model.getFlights();
             flightIn = new ObservableCollection<FlightData>(flightKeys["Incoming"]);
             flightOut = new ObservableCollection<FlightData>(flightKeys["Outgoing"]);
-            //map = new Map();
             map = _map;
             routeFlight = new MapLayer();
             showAllFlight = new MapLayer();
@@ -260,8 +259,6 @@ namespace UI.ViewModels
             myPushPin.RenderTransform = new RotateTransform(flight.DirectionFly, 7.5, 7.5);
             Location l = new Location(route.Last().lat, route.Last().lng);
             routeFlight.AddChild(myPushPin, l, PositionOrigin.Center);
-
-            
 
             map.Children.Add(routeFlight);
             showFlights();

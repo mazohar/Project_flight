@@ -49,7 +49,6 @@ namespace UI.View
 
         private void historyFlights_MouseDoubleClick(object sender, RoutedEventArgs e)
         {
-            //HistoryFlightsWindow historyFlightsWindow = new HistoryFlightsWindow(bl);
             HistoryFlightsWindow1 historyFlightsWindow = new HistoryFlightsWindow1();
 
             historyFlightsWindow.Left = this.Left;
