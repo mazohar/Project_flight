@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
+    // entities of json conversions
     public class FlightM
     {
-        // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
         public class Aircraft
         {
             public Model model { get; set; }

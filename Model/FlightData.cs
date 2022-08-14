@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
+    //An entity that contains details about a flight
     public class FlightData
     {
         public string Id { get; set; }

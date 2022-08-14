@@ -7,6 +7,7 @@ using static Entities.FlightM;
 
 namespace Entities
 {
+    //An entity that contains detailed information about a flight
     public class FlightDetails
     {
         public string Id { get; set; }
@@ -25,6 +26,6 @@ namespace Entities
         public string AirLainName { get; set; }
         public int directionFly { get; set; }
         public List<Trail> Trail { get; set; }
-        //public DateTime DateToday { get; set; }
+        
     }
 }

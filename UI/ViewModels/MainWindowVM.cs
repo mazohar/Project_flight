@@ -200,7 +200,7 @@ namespace UI.ViewModels
             Image myPushPin = new Image();
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
-            bitmap.UriSource = new Uri(@"C:\Users\renan\Source\Repos\Project_flight\UI\icon\airplane-mode.png");
+            bitmap.UriSource = new Uri(@"C:\Users\מעין זוהר\Source\Repos\Project_flight\UI\icon\airplane-mode.png");
             bitmap.DecodePixelHeight = 256;
             bitmap.DecodePixelWidth = 256;
             bitmap.EndInit();
@@ -249,7 +249,7 @@ namespace UI.ViewModels
             Image myPushPin = new Image();
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
-            bitmap.UriSource = new Uri(@"C:\Users\renan\Source\Repos\Project_flight\UI\icon\choose_airport.png");
+            bitmap.UriSource = new Uri(@"C:\Users\מעין זוהר\Source\Repos\Project_flight\UI\icon\choose_airport.png");
             bitmap.DecodePixelHeight = 256;
             bitmap.DecodePixelWidth = 256;
             bitmap.EndInit();

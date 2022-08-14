@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
+    //An entity that contains relevant details about a flight that is saved in a database
     public class FlightDB
     {
         public string Id { get; set; }
@@ -13,14 +14,7 @@ namespace Entities
         public string SourceName { get; set; }
         public string DestinationCode { get; set; }
         public string DestinationName { get; set; }
-        //public double SourceLong { get; set; }
-        //public double SourceLat { get; set; }
-        //public double DestinationLong { get; set; }
-        //public double DestinationLat { get; set; }
         public string FlightCode { get; set; }
-        //public string PictureOfAirPlane { get; set; }
-        //public string AirLainName { get; set; }
-        //public int directionFly { get; set; }
         public DateTime DateToday { get; set; }
     }
 }
