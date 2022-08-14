@@ -21,7 +21,8 @@
                         DisplayDateEnd="{Binding Mode=OneWay, Source={x:Static System:DateTime.Today}}"/>
             <DatePicker Name="toTime" SelectedDate="{Binding ToTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="110" Height="25" Canvas.Left="350" Canvas.Top="20"
                         DisplayDateEnd="{Binding Mode=OneWay, Source={x:Static System:DateTime.Today}}"/>
-            <Button x:Name="searchButton" Content="filter" Width="50" Height="25" Canvas.Left="500" Canvas.Top="20" Command="{Binding FlightsFromDBCommand, UpdateSourceTrigger=PropertyChanged}">
+            <Button x:Name="searchButton" Content="filter" Width="50" Height="25" Canvas.Left="500" Canvas.Top="20"
+                    Command="{Binding FlightsFromDBCommand, UpdateSourceTrigger=PropertyChanged}">
                 <Button.Style>
                     <Style>
                         <Style.Triggers>
@@ -39,7 +40,7 @@
             </Button>
         </Canvas>
 
-        <ListView x:Name="listViewHistory" ItemsSource="{Binding Flights, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"  Background="AliceBlue">
+        <ListView x:Name="listViewHistory" ItemsSource="{Binding Flights}" Grid.Row="1"  Background="AliceBlue">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Flight" Width="80" DisplayMemberBinding="{Binding FlightCode}"/>

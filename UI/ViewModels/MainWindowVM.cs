@@ -22,7 +22,7 @@ namespace UI.ViewModels
     class MainWindowVM : INotifyPropertyChanged
     {
         MainWindowM model = new MainWindowM();
-
+        string chooseFlightID = "";
 
         public MainWindowVM(Map _map)
         {
@@ -35,11 +35,13 @@ namespace UI.ViewModels
             showAllFlight = new MapLayer();
             map.Children.Add(routeFlight);
             map.Children.Add(showAllFlight);
-
-            holiday = ifBeforeHoliday() + " will apply soon";
+            
+            checkHoliday();
 
             frame = new Frame();
         }
+
+        
 
         ObservableCollection<FlightData> flightIn;
         public ObservableCollection<FlightData> FlightIn
@@ -81,7 +83,7 @@ namespace UI.ViewModels
             set
             {
                 routeFlight = value;
-                OnPropertyChanged("flightOut");
+                OnPropertyChanged("routeFlight");
 
             }
         }
@@ -96,7 +98,7 @@ namespace UI.ViewModels
             set
             {
                 showAllFlight = value;
-                OnPropertyChanged("flightOut");
+                OnPropertyChanged("showAllFlight");
 
             }
         }
@@ -111,7 +113,7 @@ namespace UI.ViewModels
             set
             {
                 map = value;
-                OnPropertyChanged("flightOut");
+                OnPropertyChanged("map");
 
             }
         }
@@ -126,7 +128,7 @@ namespace UI.ViewModels
             set
             {
                 frame = value;
-                OnPropertyChanged("flightOut");
+                OnPropertyChanged("frame");
 
             }
         }
@@ -140,11 +142,21 @@ namespace UI.ViewModels
             }
             set
             {
-                holiday = ifBeforeHoliday() + " will apply soon";
+                holiday = value;
                 OnPropertyChanged("holiday");
 
             }
         }
+
+        public void checkHoliday()
+        {
+            string check = ifBeforeHoliday();
+            if (check == "no holliday")
+                holiday = "Today is regular day";
+            else
+                holiday = check + " will apply soon";
+        }
+
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -171,21 +183,16 @@ namespace UI.ViewModels
                     Location l = new Location(flight.Lat, flight.Long);
                     Image myPushPin = addAirPlane(flight.DirectionFly);
                     myPushPin.ToolTip = flight.Id;
+                    myPushPin.Tag = flight.Id;
                     showAllFlight.AddChild(myPushPin, l, PositionOrigin.Center);
+                    
                 }
             }
+
+            if (chooseFlightID != "")
+                deleteFlight(chooseFlightID);
+
             map.Children.Add(showAllFlight);
-
-            /*
-             * var PlaneLocation = new Location { Latitude = lat, Longitude = lon };
-            MapLayer mapLayer = new MapLayer();
-           
-            mapLayer.AddChild(ImagePinMap, PlaneLocation, origin);
-           
-           
-
-            map.Children.Add(mapLayer);
-            */
 
         }
 
@@ -205,27 +212,20 @@ namespace UI.ViewModels
             myPushPin.RenderTransform = new RotateTransform(rotate, 7.5, 7.5);
             return myPushPin;
 
-            /*
-            RotateTransform rotateTransform = new RotateTransform(Angle);
-            image.RenderTransform = rotateTransform;
-            image.Height = 20;
-            image.Width = 20;
-            ImagePinMap = image;
-            ImagePinMap.ToolTip = flightM.FlightCode;
-            if (flightM.FlightCode == "")
-                ImagePinMap.ToolTip = "Data Problem";
 
-            var PlaneLocation = new Location { Latitude = lat, Longitude = lon };
-            MapLayer mapLayer = new MapLayer();
+        }
 
-            mapLayer.AddChild(ImagePinMap, PlaneLocation, origin);
-
-
-
-            map.Children.Add(mapLayer);
-            */
-
-
+        public void deleteFlight(string id)
+        {
+            List<Image> list = new List<Image>();
+            foreach (var item in showAllFlight.Children)
+            {
+                if (item is Image)
+                    list.Add(item as Image);
+            }
+            Image toDelete = list.Find(e => (string)e.Tag == id);
+            showAllFlight.Children.Remove(toDelete);
+            OnPropertyChanged("showAllFlight");
         }
 
         void addNewPolyLine(List<Trail> route, FlightData flight)
@@ -245,6 +245,24 @@ namespace UI.ViewModels
             pinOrigin.Location = new Location(route.First().lat, route.First().lng);
             routeFlight.Children.Add(pinOrigin);
             routeFlight.Children.Add(polyline);
+
+
+            Image myPushPin = new Image();
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri(@"C:\Users\renan\Source\Repos\Project_flight\UI\icon\choose_airport.png");
+            bitmap.DecodePixelHeight = 256;
+            bitmap.DecodePixelWidth = 256;
+            bitmap.EndInit();
+            myPushPin.Source = bitmap;
+            myPushPin.Width = 20;
+            myPushPin.Height = 20;
+            myPushPin.RenderTransform = new RotateTransform(flight.DirectionFly, 7.5, 7.5);
+            Location l = new Location(route.Last().lat, route.Last().lng);
+            routeFlight.AddChild(myPushPin, l, PositionOrigin.Center);
+
+            
+
             map.Children.Add(routeFlight);
             showFlights();
 
@@ -258,6 +276,9 @@ namespace UI.ViewModels
             {
                 var trail = (from t in flight.Trail orderby t.ts select t).ToList<Trail>();
                 addNewPolyLine(trail, selectedFlight);
+
+                deleteFlight(selectedFlight.Id);
+                chooseFlightID = selectedFlight.Id;
 
                 model.addFlightToDB(flight);
 
@@ -273,9 +294,11 @@ namespace UI.ViewModels
         public string ifBeforeHoliday()
         {
             DateTime today = DateTime.Now;
-            today = new DateTime(2022, 8, 4);
+            //today = new DateTime(2022, 8, 4);
             string value = model.IfErevHolliday(today.Year, today.Month, today.Day);
-            return value.Remove(0, 5);
+            if (value != "no holliday")
+                value.Remove(0, 5);
+            return value;
         }
     }
 }

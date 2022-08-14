@@ -42,7 +42,7 @@
         <ListView x:Name="listViewFlightIn" ItemsSource="{Binding FlightIn}" Height="240" Width="200" Grid.Row="1" Background="AliceBlue" MouseDoubleClick="listViewFlightIn_MouseDoubleClick">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="No. flight" Width="75" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="ID flight" Width="75" DisplayMemberBinding="{Binding Id}"/>
                     <GridViewColumn Header="From" Width="75" DisplayMemberBinding="{Binding Source}"/>
                 </GridView>
             </ListView.View>
@@ -51,7 +51,7 @@
         <ListView x:Name="listViewFlightOut" ItemsSource="{Binding FlightOut}" Height="240" Width="200" Grid.Row="3"  Background="AliceBlue" MouseDoubleClick="listViewFlightOut_MouseDoubleClick">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="No. flight" Width="75" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="ID flight" Width="75" DisplayMemberBinding="{Binding Id}"/>
                     <GridViewColumn Header="To" Width="75" DisplayMemberBinding="{Binding Destination}"/>
 
                 </GridView>

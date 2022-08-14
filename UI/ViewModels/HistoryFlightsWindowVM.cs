@@ -85,6 +85,7 @@ namespace UI.ViewModels
                     flightFilter.Remove(item);
             }
             flights = flightFilter;
+            OnPropertyChanged("flights");
         }
 
 
