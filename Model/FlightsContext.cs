@@ -8,6 +8,7 @@ using Entities;
 
 namespace Entities
 {
+    //An entity that is stored in a database
     public class FlightsContext : DbContext
     {
         public FlightsContext() : base("FlightDB")

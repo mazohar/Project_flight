@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
+    //An entity that stores weather data
     public class Weather
     {
         public string Temp { get; set; }

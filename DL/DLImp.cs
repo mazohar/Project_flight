@@ -14,18 +14,11 @@ namespace DL
 {
     public class DLImp : IDL
     {
-        //AsynceAdapter data = new AsynceAdapter();
+        //Information about all flights
         private const string AllURL = @"https://data-cloud.flightradar24.com/zones/fcgi/feed.js?faa=1&bounds=41.828%2C14.592%2C7.532%2C50.685&satellite=1&mlat=1&flarm=1&adsb=1&gnd=1&air=1&vehicles=1&estimated=1&maxage=14400&gliders=1&stats=1";
-        private const string FlightURL = @"https://data-live.flightradar24.com/clickhandler/?version=1.5&flight=";
-        #region singelton
-        static readonly DLImp instance = new DLImp();
-        static DLImp() { }
-        public static DLImp Instance => instance;
-        #endregion
 
-        //private Dictionary<string, List<FlightData>> Flights = new Dictionary<string, List<FlightData>>();
-        //private List<FlightData> FIncoming = new List<FlightData>();
-        //private List<FlightData> FOutgoing = new List<FlightData>();
+        ////Information on one flight
+        private const string FlightURL = @"https://data-live.flightradar24.com/clickhandler/?version=1.5&flight=";
 
         //return all the data at the data base
         public Dictionary<string, List<FlightData>> getFlights()
@@ -33,8 +26,7 @@ namespace DL
             Dictionary<string, List<FlightData>> Result = new Dictionary<string, List<FlightData>>(); // return to BL
 
             JObject AllFlightData = null;
-            //IList<string> Keys = null;
-            //IList<Object> Values = null;
+
 
             List<FlightData> Incoming = new List<FlightData>();
             List<FlightData> Outgoing = new List<FlightData>();
@@ -57,7 +49,7 @@ namespace DL
                         
                         if (item.Value[11].ToString() == "TLV" && item.Value[12].ToString() != "")
                         {
-
+                            //Entry into the appropriate list by origin
                             Outgoing.Add(new FlightData
                             {
                                 Id = item.Value[0].ToString(),
@@ -75,7 +67,7 @@ namespace DL
                         }
                         if (item.Value[12].ToString() == "TLV" && item.Value[11].ToString() != "")
                         {
-
+                            //Enter the appropriate list by destination
                             Incoming.Add(new FlightData
                             {
                                 Id = item.Value[0].ToString(),
@@ -97,13 +89,14 @@ namespace DL
                 catch (Exception e) { Debug.Print(e.Message); }
 
             }
+            //Add to dictionary
 
             Result.Add("Incoming", Incoming);
             Result.Add("Outgoing", Outgoing);
             return Result;
         }
 
-        //return one flights
+        //return one flight
         public FlightDetails getFlightData(string key)
         {
             HelperClass Helper = new HelperClass();
@@ -142,14 +135,16 @@ namespace DL
             return currentFlight;
         }
 
+        //Weather check by location
         public Weather GetWeather(double latatiude, double longitude)
         {
+            //Finding a suitable url
             var weatherURL = @"https://api.openweathermap.org/data/2.5/weather?lat="+latatiude+"&lon="+longitude+"&appid=bf170d314bba00b81c13654dc76b3e09";
             Weather weather = new Weather();
             using (var webClient = new System.Net.WebClient())
             {
                 var json = webClient.DownloadString(weatherURL);
-                //JObject allWeather = JObject.Parse(json);
+                
                 try
                 {
                     var v = JsonConvert.DeserializeObject<Entities.FlightM.Root1>(json);
@@ -164,10 +159,12 @@ namespace DL
             }
             return weather;
         }
+
+        //Checking whether a certain day is a holiday
         public string IfErevHolliday(int year, int month, int day)
         {
             DateTime date = new DateTime(year, month, day);
-            //date = DateTime.Today;
+            //Check for the coming week
             for (int i = 1; i <= 6; i++)
             {
                 date = date.AddDays(1);
@@ -177,10 +174,10 @@ namespace DL
                     var mm = date.ToString("MM");
                     var dd = date.ToString("dd");
                     string dateURL = $"https://www.hebcal.com/converter?cfg=json&date={yyyy}-{mm}-{dd}&g2h=1&strict=1";
-                    //var json = await webClient.DownloadStringTaskAsync(dateURL);
                     var json = webClient.DownloadString(dateURL);
                     var v = JsonConvert.DeserializeObject<Entities.FlightM.Root2>(json);
                     var events = v.events;
+                    //If there an event that contains the word Erev
                     foreach (var e in events)
                     {
                         if (e.Contains("Erev"))
@@ -192,8 +189,10 @@ namespace DL
             return "no holliday";
         }
 
+        //Entering a flight into a database
         public void addFlightToDB(FlightDetails flight)
         {
+            //Creating a flight map and entering data
             FlightDB flightDB = new FlightDB();
             flightDB.Id = flight.Id;
             flightDB.SourceCode = flight.SourceCode;
@@ -213,6 +212,7 @@ namespace DL
             }
         }
 
+        //Extracting flights from a database
         public ObservableCollection<FlightDB> GetFlightsFromDB()
         {
             using (var db = new FlightsContext())
@@ -224,15 +224,6 @@ namespace DL
             }
         }
 
-        public void FixEfProviderServicesProblem()
-        {
-            //The Entity Framework provider type 'System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer'
-            //for the 'System.Data.SqlClient' ADO.NET provider could not be loaded. 
-            //Make sure the provider assembly is available to the running application. 
-            //See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
-
-            var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
-        }
 
     }
 }
