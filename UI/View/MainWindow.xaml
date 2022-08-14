@@ -32,7 +32,7 @@
 
         <Button x:Name="historyFlights" Grid.Column="0" Grid.Row="0" Height="50" Width="50" Margin="10,10,240.8,10" MouseDoubleClick="historyFlights_MouseDoubleClick"
                  Background="#26AEBC" BorderBrush="#26AEBC" ToolTip="show history of flights">
-            <Image Source="C:\Users\renan\source\repos\projectFlights\UI\icon\history.png" Width="40"/>
+            <Image Source="C:\Users\מעין זוהר\Source\Repos\Project_flight3\UI\icon\history.png" Width="40"/>
         </Button>
 
         <Label x:Name="holidatLabel" Content="{Binding Holiday}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"

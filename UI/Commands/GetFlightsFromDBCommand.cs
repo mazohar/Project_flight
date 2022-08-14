@@ -8,6 +8,7 @@ using UI.ViewModels;
 
 namespace UI.Commands
 {
+    //Responsible for the "Filter" button on the search page
     class GetFlightsFromDBCommand : ICommand
     {
         HistoryFlightsWindowVM vm;
@@ -35,6 +36,7 @@ namespace UI.Commands
             return true;
         }
 
+        //A call to the function that is responsible for displaying all the flights in the database
         public void Execute(object parameter)
         {
             vm.GetFlightsFromDB();

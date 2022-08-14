@@ -8,6 +8,7 @@ using Entities;
 
 namespace UI.Models
 {
+    //Model for the main page
     class MainWindowM
     {
         IBL bl;

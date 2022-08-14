@@ -14,11 +14,15 @@ using UI.Models;
 
 namespace UI.ViewModels
 {
+    //view model for the history flights window
     class HistoryFlightsWindowVM : INotifyPropertyChanged
     {
+        //object of the model type
         HistoryFlightsWindowM model = new HistoryFlightsWindowM();
+
         GetFlightsFromDBCommand command;
 
+        //constructor
         public HistoryFlightsWindowVM()
         {
             flights = new ObservableCollection<FlightDB>();
@@ -27,8 +31,10 @@ namespace UI.ViewModels
             toTime = DateTime.Today;
         }
 
+        
         public ICommand FlightsFromDBCommand { get; set; }
 
+        //property:
 
         ObservableCollection<FlightDB> flights;
         public ObservableCollection<FlightDB> Flights
@@ -75,6 +81,7 @@ namespace UI.ViewModels
             }
         }
 
+        //The function over all the flights in the database and checks which ones are in the requested date range
         public void GetFlightsFromDB()
         {
             flights = model.GetFlightsFromDB();

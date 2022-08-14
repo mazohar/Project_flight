@@ -19,11 +19,16 @@ using BL;
 
 namespace UI.ViewModels
 {
+    //view model for the main window
     class MainWindowVM : INotifyPropertyChanged
     {
+        //object of the model type
         MainWindowM model = new MainWindowM();
+
+        //ID for the current flight - which we can display even after a 10-second update
         string chooseFlightID = "";
 
+        //constructor
         public MainWindowVM(Map _map)
         {
             var flightKeys = model.getFlights();
@@ -34,13 +39,15 @@ namespace UI.ViewModels
             showAllFlight = new MapLayer();
             map.Children.Add(routeFlight);
             map.Children.Add(showAllFlight);
-            
+
+            //Checking whether today is the day before a holiday
             checkHoliday();
 
             frame = new Frame();
         }
 
-        
+
+        //property:
 
         ObservableCollection<FlightData> flightIn;
         public ObservableCollection<FlightData> FlightIn
@@ -164,6 +171,7 @@ namespace UI.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
+        //A function that displays all flights
         public void showFlights()
         {
             Location BGA = new Location(32.009444, 34.876944);
@@ -177,6 +185,7 @@ namespace UI.ViewModels
 
             foreach (var i in flightKeys)
             {
+                // Going over each flight and creating a picture that fits
                 foreach (var flight in i.Value)
                 {
                     Location l = new Location(flight.Lat, flight.Long);
@@ -188,6 +197,7 @@ namespace UI.ViewModels
                 }
             }
 
+            // Deleting the current plane to put it in a glowing color
             if (chooseFlightID != "")
                 deleteFlight(chooseFlightID);
 
@@ -195,12 +205,13 @@ namespace UI.ViewModels
 
         }
 
+        //Rotate the image to the angle of flight
         Image addAirPlane(int rotate)
         {
             Image myPushPin = new Image();
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
-            bitmap.UriSource = new Uri(@"C:\Users\renan\source\repos\Project_flight\UI\icon\airplane-mode.png");
+            bitmap.UriSource = new Uri(@"C:\Users\מעין זוהר\Source\Repos\Project_flight3\UI\icon\airplane-mode.png");
             bitmap.DecodePixelHeight = 256;
             bitmap.DecodePixelWidth = 256;
             bitmap.EndInit();
@@ -214,6 +225,7 @@ namespace UI.ViewModels
 
         }
 
+        //Deletion of a certain flight by the id of a selected flight
         public void deleteFlight(string id)
         {
             List<Image> list = new List<Image>();
@@ -222,13 +234,16 @@ namespace UI.ViewModels
                 if (item is Image)
                     list.Add(item as Image);
             }
-            Image toDelete = list.Find(e => (string)e.Tag == id);
-            showAllFlight.Children.Remove(toDelete);
-            OnPropertyChanged("showAllFlight");
+            
+            Image toDelete = list.Find(e => (string)e.Tag == id); // Finding the flight by its id
+            showAllFlight.Children.Remove(toDelete); // remove the flight
+            OnPropertyChanged("showAllFlight"); // updating
         }
 
+        // Drawing the route of the flight
         void addNewPolyLine(List<Trail> route, FlightData flight)
         {
+            //Clearing the map
             routeFlight.Children.Clear();
             map.Children.Remove(routeFlight);
 
@@ -237,6 +252,8 @@ namespace UI.ViewModels
             polyline.StrokeThickness = 1;
             polyline.Opacity = 0.7;
             polyline.Locations = new LocationCollection();
+
+            //Going over the entire trail and adding a line by location
             foreach (var item in route)
                 polyline.Locations.Add(new Location(item.lat, item.lng));
 
@@ -245,11 +262,11 @@ namespace UI.ViewModels
             routeFlight.Children.Add(pinOrigin);
             routeFlight.Children.Add(polyline);
 
-
+            //Adding a picture to the current plane - in bold color
             Image myPushPin = new Image();
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
-            bitmap.UriSource = new Uri(@"C:\Users\renan\source\repos\Project_flight\UI\icon\choose_airport.png");
+            bitmap.UriSource = new Uri(@"C:\Users\מעין זוהר\Source\Repos\Project_flight3\UI\icon\choose_airport.png");
             bitmap.DecodePixelHeight = 256;
             bitmap.DecodePixelWidth = 256;
             bitmap.EndInit();
@@ -261,15 +278,19 @@ namespace UI.ViewModels
             routeFlight.AddChild(myPushPin, l, PositionOrigin.Center);
 
             map.Children.Add(routeFlight);
+            //Showing all flights
             showFlights();
 
         }
 
+        //Double click event on the list of flights
         public void listView_MouseDoubleClick(FlightData selectedFlight)
         {
             FlightDetails flight = model.getFlightData(selectedFlight.SourceId);
 
-            if(flight != null && flight.Trail != null)
+            //Drawing the plane's route line, deleting the plane and placing a new plane is highlighted
+
+            if (flight != null && flight.Trail != null)
             {
                 var trail = (from t in flight.Trail orderby t.ts select t).ToList<Trail>();
                 addNewPolyLine(trail, selectedFlight);
@@ -288,13 +309,13 @@ namespace UI.ViewModels
 
         }
 
+        //Checking if it is a holiday and returning the appropriate value
         public string ifBeforeHoliday()
         {
             DateTime today = DateTime.Now;
-            //today = new DateTime(2022, 8, 4);
             string value = model.IfErevHolliday(today.Year, today.Month, today.Day);
             if (value != "no holliday")
-                value.Remove(0, 5);
+                value.Remove(0, 5); //to download the word "Erav"
             return value;
         }
     }

@@ -24,7 +24,7 @@
         
         <Canvas Grid.RowSpan="1" Grid.ColumnSpan="2" Background="#26AEBC">
             <Button x:Name="exit" Width="25" Height="25" Canvas.Top="12.5" Canvas.Left="5" Click="exit_Click" Background="#26AEBC" BorderBrush="#26AEBC">
-                <Image Source="C:\Users\renan\source\repos\projectFlights\UI\icon\undo.png"/>
+                <Image Source="C:\Users\מעין זוהר\Source\Repos\Project_flight3\UI\icon\undo.png"/>
             </Button>
             <Label x:Name="flightCode" Content="{Binding Flight.FlightCode, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="30" VerticalContentAlignment="Center" Canvas.Left="40" 
                    FontWeight="Bold" FontSize="15"/>

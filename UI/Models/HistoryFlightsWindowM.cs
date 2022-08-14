@@ -9,6 +9,7 @@ using Entities;
 
 namespace UI.Models
 {
+    //A model for the data history page
     class HistoryFlightsWindowM
     {
         IBL bl;
