@@ -279,7 +279,7 @@ namespace UI.ViewModels
 
                 model.addFlightToDB(flight);
 
-                frame.Content = new DetailsPage1(flight);
+                frame.Content = new DetailsPage(flight);
             }
             else
             {

@@ -12,41 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BL;
+using UI.ViewModels;
 using Entities;
 
 namespace UI.View
 {
     /// <summary>
-    /// Interaction logic for details.xaml
+    /// Interaction logic for DetailsPage1.xaml
     /// </summary>
-    public partial class DetailsPage : Page
+    public partial class DetailsPage
     {
-        IBL bl;
-        public DetailsPage(IBL _bl, FlightDetails flight)
+        DetailsPageVM DetailsPageVM;
+        public DetailsPage(FlightDetails flight)
         {
+            DetailsPageVM = new DetailsPageVM(flight);
             InitializeComponent();
-            bl = _bl;
-            Weather weatherDes = bl.GetWeather(flight.DestinationLat, flight.DestinationLong);
-            Weather weatherOrigin = bl.GetWeather(flight.SourceLat, flight.SourceLong);
-            flightCode.Content = flight.FlightCode;
-            airLine.Content = flight.AirLainName;
-            var uriSource = new Uri(flight.PictureOfAirPlane);
-            pictureAirPLane.Source = new BitmapImage(uriSource);
-            originCode.Content = flight.SourceCode;
-            originName.Content = flight.SourceName;
-            desCode.Content = flight.DestinationCode;
-            desName.Content = flight.DestinationName;
-            originTime.Content = flight.TimeOfFly;
-            desTime.Content = flight.TimeOfFArrive;
-            tempOrigin.Content = weatherOrigin.Temp + "°";
-            feelOrigin.Content = weatherOrigin.FeelLikeTemp + "°";
-            tempDes.Content = weatherDes.Temp + "°";
-            feelDes.Content = weatherDes.FeelLikeTemp + "°";
-            stateOrigin.Content = weatherOrigin.State;
-            stateDes.Content = weatherDes.State;
-
-            //bool isLate = flight.TimeOfFArrive < DateTime.Now;
+            DataContext = DetailsPageVM;
         }
 
         private void exit_Click(object sender, RoutedEventArgs e)

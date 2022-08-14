@@ -11,22 +11,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UI.ViewModels;
 
 namespace UI.View
 {
     /// <summary>
-    /// Interaction logic for HistoryFlightsWindow1.xaml
+    /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class HistoryFlightsWindow : Window
+    public partial class UserControlDetails : UserControl
     {
-        HistoryFlightsWindowVM vm = new HistoryFlightsWindowVM();
-        public HistoryFlightsWindow()
+        DetailsPageVM DetailsPageVM;
+        public FlightDetails flight { get; set; }
+        public UserControlDetails()
         {
-            InitializeComponent();
-            DataContext = vm;
-        }
+            DetailsPageVM = new DetailsPageVM(flight);
 
+            InitializeComponent();
+            DataContext = DetailsPageVM;
+        }
     }
 }

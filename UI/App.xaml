@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
              xmlns:local="clr-namespace:UI"
-             StartupUri="View/MainWindow1.xaml">
+             StartupUri="View/MainWindow.xaml">
     <Application.Resources>
 
         <Style x:Key="styleImage" TargetType="Image">
